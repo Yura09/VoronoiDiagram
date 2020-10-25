@@ -9,8 +9,7 @@ import javax.swing.*;
 
 public class Voronoi extends JFrame {
     private static BufferedImage I;
-
-    public Voronoi() {
+    private Voronoi() {
         super("Voronoi Diagram");
         int size = 1000;
         setBounds(0, 0, size, size);
@@ -43,25 +42,18 @@ public class Voronoi extends JFrame {
         for (int i = 0; i < cells; i++) {
             g.fill(new Ellipse2D.Double(px[i] - 2.5, py[i] - 2.5, 5, 5));
         }
-
         try {
             ImageIO.write(I, "png", new File("voronoi.png"));
         } catch (IOException ignored) {
 
         }
-
     }
-
-    static double distance(int x1, int x2, int y1, int y2) {
-        double d = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
-
-        return d;
+    private static double distance(int x1, int x2, int y1, int y2) {
+        return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
     }
-
     public static void main(String[] args) {
         new Voronoi().setVisible(true);
     }
-
     public void paint(Graphics g) {
         g.drawImage(I, 0, 0, this);
     }
